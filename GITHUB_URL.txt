@@ -1,0 +1,2 @@
+https://github.com/wuxinyaowx-debug/paper-latex-builder.git
+仓库内容：latex-write-build Skill（SKILL.md、README.md、scripts/、references/、examples/），与本地 submission 目录保持一致。

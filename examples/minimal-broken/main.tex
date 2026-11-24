@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+% 故意缺失 \usepackage{booktabs}：下面的 \toprule 会触发 undefined control sequence
+
+\title{Minimal Example (DEMO)}
+\author{Skill Example}
+\date{2026-11}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This section references Equation~\eqref{eq:demo} and the missing Section~\ref{sec:nosuchlabel}.
+
+\section{Method}
+\begin{equation}
+  E = m c^2
+  \label{eq:demo}
+\end{equation}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Demo table}
+  \begin{tabular}{ll}
+    \toprule
+    Item & Value \\
+    \midrule
+    A & 1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
