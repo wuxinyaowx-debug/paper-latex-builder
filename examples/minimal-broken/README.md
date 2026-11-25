@@ -15,11 +15,14 @@
 ## 调用
 
 ```bash
-python ../../scripts/latex_build.py --project . --report /tmp/demo-build.json
-# 预期（有 TeX 环境时）：status=errors，引擎 pdflatex，1–2 轮
+# 0. 静态预检（无需 TeX）：立即报出 [error|ref_missing] main.tex:13
+python ../../scripts/latex_preflight.py --project . --text
 
+# 1. 构建（需 TeX 环境）：预期 status=errors，引擎 pdflatex，1–2 轮
+python ../../scripts/latex_build.py --project . --report /tmp/demo-build.json
+
+# 2. 分诊：预期 fix_queue 前两条
 python ../../scripts/latex_log_triage.py main.log --text
-# 预期 fix_queue 前两条：
 # [P1|undefined_control_sequence] ./main.tex:24 -- Undefined control sequence (\toprule)
 # [P2|undefined_reference]        ./main.tex:13 -- Reference 'sec:nosuchlabel' undefined
 ```

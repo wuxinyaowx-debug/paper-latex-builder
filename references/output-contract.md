@@ -54,8 +54,18 @@
 
 ## 4. 不确定性（uncertainty）
 
-材料缺口、相互冲突、需人工确认项、无法修复的错误，逐条写明：问题、已尝试的处置、
-对产物的影响。产物内对应位置用 `% TODO(确认):` 标注。
+按题目要求**分别说明**三类情况，每条带 `kind` 字段，不得混写：
+
+```json
+{"kind": "materials_missing", "issue": "材料未给出实验随机种子", "impact": "表 2 备注留空"}
+{"kind": "undecidable", "issue": "两处材料的样本量表述冲突（500 vs 480）",
+ "tried": "已对照原文图表，无法裁决", "impact": "正文标注 % TODO(确认)"}
+{"kind": "run_failed", "issue": "评测环境无 xelatex，未完成真实编译",
+ "tried": "latex_preflight.py 静态核查通过（0 error）", "impact": "编译状态未经引擎验证"}
+```
+
+规则：材料缺失、无法判断、运行失败分别标注；逐条写明问题、已尝试的处置、对产物
+的影响；产物内对应位置用 `% TODO(确认):` 标注。
 
 ## 5. 产物与构建证据（artifacts / build_report）
 

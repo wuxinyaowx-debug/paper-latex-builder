@@ -1,0 +1,52 @@
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.3.1)  24 NOV 2026 10:00
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+(./ctexart.cls
+Document Class: ctexart 2022/07/14 v2.5.10 Chinese adapter for article (CTEX)
+)
+(./chapters/intro.tex [1]
+./chapters/intro.tex:13: Undefined control sequence.
+l.13 According to \authoryeard citation style
+                    we proceed.
+)
+[2]
+! Undefined control sequence.
+l.24     \toprule
+
+?
+! Missing $ inserted.
+<inserted text>
+$
+l.31 The energy is E = m c^2_and more text
+?
+(./chapters/method.tex
+! LaTeX Error: \begin{align} on input line 40 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+l.52 \end{document}
+
+)
+! Emergency stop.
+<*> ./main.tex
+
+*** (job aborted, no legal \end found)
+
+LaTeX Warning: Reference `sec:results' on page 3 undefined on input line 55.
+
+LaTeX Warning: Citation `smith2020' on page 3 undefined on input line 57.
+
+Overfull \hbox (24.0pt too wide) in paragraph at lines 60--61
+
+Package fontspec Warning: Font "NotExistFont" not found, using default.
+
+LaTeX Warning: There were undefined references.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+)
+(see the transcript file for additional information)
+Output written on main.pdf (3 pages, 12345 bytes).

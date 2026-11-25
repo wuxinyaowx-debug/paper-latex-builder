@@ -1,0 +1,300 @@
+{
+  "log": "D:\\文档\\01_研一\\科技写作\\玻尔\\写作13｜LaTeX 写作与编译\\submission\\examples\\log-triage-demo\\demo.log",
+  "summary": {
+    "total_findings": 13,
+    "by_category": {
+      "undefined_control_sequence": 2,
+      "bibtex_error": 2,
+      "math_mode_error": 1,
+      "environment_error": 1,
+      "emergency_stop": 1,
+      "undefined_reference": 1,
+      "undefined_citation": 1,
+      "overfull_box": 1,
+      "font_missing": 1,
+      "rerun_needed": 1,
+      "bibtex_warning": 1
+    },
+    "by_priority": {
+      "P0": 1,
+      "P1": 7,
+      "P2": 4,
+      "P3": 1
+    },
+    "fix_queue": [
+      {
+        "category": "emergency_stop",
+        "priority": "P0",
+        "file": null,
+        "line": null,
+        "signature": "! Emergency stop.",
+        "message": "Emergency stop.",
+        "context": "",
+        "root_cause": "编译被前序错误终止（级联）",
+        "suggested_fix": "按本报告的 P0/P1 顺序先修复最早的真实错误，Emergency stop 通常随之消失"
+      },
+      {
+        "category": "font_missing",
+        "priority": "P1",
+        "file": null,
+        "line": null,
+        "signature": "Package fontspec Warning: Font \"NotExistFont\" not found, using default.",
+        "message": "Font \"NotExistFont\" not found, using default.",
+        "root_cause": "字体缺失或当前引擎不支持该字体调用",
+        "suggested_fix": "XeLaTeX/LuaLaTeX 用 fc-list / font-discovery 查可用字体并改名；勿删除字体声明后静默换字体，需在变更记录中注明"
+      },
+      {
+        "category": "undefined_control_sequence",
+        "priority": "P1",
+        "file": null,
+        "line": 24,
+        "signature": "! Undefined control sequence.",
+        "message": "Undefined control sequence.",
+        "context": "\\toprule",
+        "root_cause": "命令拼写错误、宏包未加载或命令定义缺失",
+        "suggested_fix": "出错命令为 \\toprule；查看 l.N 上下文中的命令名：拼写错误直接改正；属于某宏包的命令则在导言区补 \\usepackage；自定义命令核对 \\newcommand 定义位置"
+      },
+      {
+        "category": "math_mode_error",
+        "priority": "P1",
+        "file": null,
+        "line": 31,
+        "signature": "! Missing $ inserted.",
+        "message": "Missing $ inserted.",
+        "context": "The energy is E = m c^2_and more text ?",
+        "root_cause": "数学模式使用错误（$ 缺失、上下标重复、对齐符越界）",
+        "suggested_fix": "定位 l.N：补全 $...$ / 公式环境；上下标分组加花括号；检查 tabular/array 列数与 & 数量一致"
+      },
+      {
+        "category": "undefined_control_sequence",
+        "priority": "P1",
+        "file": "./chapters/intro.tex",
+        "line": 13,
+        "signature": "./chapters/intro.tex:13: Undefined control sequence.",
+        "message": "Undefined control sequence.",
+        "root_cause": "命令拼写错误、宏包未加载或命令定义缺失",
+        "suggested_fix": "查看 l.N 上下文中的命令名：拼写错误直接改正；属于某宏包的命令则在导言区补 \\usepackage；自定义命令核对 \\newcommand 定义位置"
+      },
+      {
+        "category": "environment_error",
+        "priority": "P1",
+        "file": "./chapters/method.tex",
+        "line": 52,
+        "signature": "! LaTeX Error: \\begin{align} on input line 40 ended by \\end{document}.",
+        "message": "LaTeX Error: \\begin{align} on input line 40 ended by \\end{document}.",
+        "context": "\\end{document}",
+        "root_cause": "环境不配对或未定义",
+        "suggested_fix": "核对 \\begin/\\end 名称一致；未定义环境补相应宏包（如 amsthm 的 proof）"
+      },
+      {
+        "category": "bibtex_error",
+        "priority": "P1",
+        "file": "demo.blg",
+        "line": null,
+        "signature": "I couldn't open database file refs.bib",
+        "message": "I couldn't open database file refs.bib",
+        "root_cause": "BibTeX/Biber 数据库错误（.bib 缺失、重复条目、非法字符）",
+        "suggested_fix": "打开 .blg 对应行定位 .bib 问题：文件缺失则核对 \\bibliography 路径；重复键合并条目；修后重跑含 bib 轮次的构建"
+      },
+      {
+        "category": "bibtex_error",
+        "priority": "P1",
+        "file": "demo.blg",
+        "line": null,
+        "signature": "---line 12 of file main.aux",
+        "message": "---line 12 of file main.aux",
+        "root_cause": "BibTeX/Biber 数据库错误（.bib 缺失、重复条目、非法字符）",
+        "suggested_fix": "打开 .blg 对应行定位 .bib 问题：文件缺失则核对 \\bibliography 路径；重复键合并条目；修后重跑含 bib 轮次的构建"
+      },
+      {
+        "category": "rerun_needed",
+        "priority": "P2",
+        "file": null,
+        "line": null,
+        "signature": "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.",
+        "message": "Label(s) may have changed. Rerun to get cross-references right.",
+        "root_cause": "交叉引用/目录尚未收敛",
+        "suggested_fix": "再运行一轮编译；latex_build.py 的 aux 哈希收敛检测会自动处理"
+      },
+      {
+        "category": "undefined_reference",
+        "priority": "P2",
+        "file": null,
+        "line": 55,
+        "signature": "LaTeX Warning: Reference `sec:results' on page 3 undefined on input line 55.",
+        "message": "Reference `sec:results' on page 3 undefined on input line 55.",
+        "root_cause": "交叉引用未解析：轮次不足或 \\label 缺失/拼写错误",
+        "suggested_fix": "先再跑一轮编译；多轮后仍存在则核对 \\label 与 \\ref/\\eqref/\\autoref 的键名一致"
+      },
+      {
+        "category": "undefined_citation",
+        "priority": "P2",
+        "file": null,
+        "line": 57,
+        "signature": "LaTeX Warning: Citation `smith2020' on page 3 undefined on input line 57.",
+        "message": "Citation `smith2020' on page 3 undefined on input line 57.",
+        "root_cause": "文献引用未解析：缺 bibtex/biber 轮次或 .bib 条目缺失",
+        "suggested_fix": "运行 latex_build.py（自动插入 bib 轮次）；仍存在则核对 \\cite 键与 .bib 条目，并检查 .blg 中的 BibTeX 错误"
+      },
+      {
+        "category": "bibtex_warning",
+        "priority": "P2",
+        "file": "demo.blg",
+        "line": null,
+        "signature": "Warning--empty year in smith2020",
+        "message": "Warning--empty year in smith2020",
+        "root_cause": "BibTeX 条目字段缺失或格式问题",
+        "suggested_fix": "按 .blg 提示补字段（如 year、pages）；核对条目键与正文 \\cite 一致"
+      },
+      {
+        "category": "overfull_box",
+        "priority": "P3",
+        "file": null,
+        "line": 60,
+        "signature": "Overfull \\hbox (24.0pt too wide) in paragraph at lines 60--61",
+        "message": "Overfull \\hbox (24.0pt too wide) in paragraph at lines 60--61",
+        "root_cause": "版式溢出/欠满（不影响编译通过）",
+        "suggested_fix": "表格溢出优先调列宽（p{} 列、tabulary）或缩字号局部处理，禁止用 \\resizebox/\\scalebox 整体掩盖；行溢出检查长 URL/数学式断行"
+      }
+    ],
+    "advice": [
+      "存在 Emergency stop：按 fix_queue 从第一个 P0/P1 修起，勿在级联错误上逐条纠缠。"
+    ]
+  },
+  "findings": [
+    {
+      "category": "undefined_control_sequence",
+      "priority": "P1",
+      "file": "./chapters/intro.tex",
+      "line": 13,
+      "signature": "./chapters/intro.tex:13: Undefined control sequence.",
+      "message": "Undefined control sequence.",
+      "root_cause": "命令拼写错误、宏包未加载或命令定义缺失",
+      "suggested_fix": "查看 l.N 上下文中的命令名：拼写错误直接改正；属于某宏包的命令则在导言区补 \\usepackage；自定义命令核对 \\newcommand 定义位置"
+    },
+    {
+      "category": "undefined_control_sequence",
+      "priority": "P1",
+      "file": null,
+      "line": 24,
+      "signature": "! Undefined control sequence.",
+      "message": "Undefined control sequence.",
+      "context": "\\toprule",
+      "root_cause": "命令拼写错误、宏包未加载或命令定义缺失",
+      "suggested_fix": "出错命令为 \\toprule；查看 l.N 上下文中的命令名：拼写错误直接改正；属于某宏包的命令则在导言区补 \\usepackage；自定义命令核对 \\newcommand 定义位置"
+    },
+    {
+      "category": "math_mode_error",
+      "priority": "P1",
+      "file": null,
+      "line": 31,
+      "signature": "! Missing $ inserted.",
+      "message": "Missing $ inserted.",
+      "context": "The energy is E = m c^2_and more text ?",
+      "root_cause": "数学模式使用错误（$ 缺失、上下标重复、对齐符越界）",
+      "suggested_fix": "定位 l.N：补全 $...$ / 公式环境；上下标分组加花括号；检查 tabular/array 列数与 & 数量一致"
+    },
+    {
+      "category": "environment_error",
+      "priority": "P1",
+      "file": "./chapters/method.tex",
+      "line": 52,
+      "signature": "! LaTeX Error: \\begin{align} on input line 40 ended by \\end{document}.",
+      "message": "LaTeX Error: \\begin{align} on input line 40 ended by \\end{document}.",
+      "context": "\\end{document}",
+      "root_cause": "环境不配对或未定义",
+      "suggested_fix": "核对 \\begin/\\end 名称一致；未定义环境补相应宏包（如 amsthm 的 proof）"
+    },
+    {
+      "category": "emergency_stop",
+      "priority": "P0",
+      "file": null,
+      "line": null,
+      "signature": "! Emergency stop.",
+      "message": "Emergency stop.",
+      "context": "",
+      "root_cause": "编译被前序错误终止（级联）",
+      "suggested_fix": "按本报告的 P0/P1 顺序先修复最早的真实错误，Emergency stop 通常随之消失"
+    },
+    {
+      "category": "undefined_reference",
+      "priority": "P2",
+      "file": null,
+      "line": 55,
+      "signature": "LaTeX Warning: Reference `sec:results' on page 3 undefined on input line 55.",
+      "message": "Reference `sec:results' on page 3 undefined on input line 55.",
+      "root_cause": "交叉引用未解析：轮次不足或 \\label 缺失/拼写错误",
+      "suggested_fix": "先再跑一轮编译；多轮后仍存在则核对 \\label 与 \\ref/\\eqref/\\autoref 的键名一致"
+    },
+    {
+      "category": "undefined_citation",
+      "priority": "P2",
+      "file": null,
+      "line": 57,
+      "signature": "LaTeX Warning: Citation `smith2020' on page 3 undefined on input line 57.",
+      "message": "Citation `smith2020' on page 3 undefined on input line 57.",
+      "root_cause": "文献引用未解析：缺 bibtex/biber 轮次或 .bib 条目缺失",
+      "suggested_fix": "运行 latex_build.py（自动插入 bib 轮次）；仍存在则核对 \\cite 键与 .bib 条目，并检查 .blg 中的 BibTeX 错误"
+    },
+    {
+      "category": "overfull_box",
+      "priority": "P3",
+      "file": null,
+      "line": 60,
+      "signature": "Overfull \\hbox (24.0pt too wide) in paragraph at lines 60--61",
+      "message": "Overfull \\hbox (24.0pt too wide) in paragraph at lines 60--61",
+      "root_cause": "版式溢出/欠满（不影响编译通过）",
+      "suggested_fix": "表格溢出优先调列宽（p{} 列、tabulary）或缩字号局部处理，禁止用 \\resizebox/\\scalebox 整体掩盖；行溢出检查长 URL/数学式断行"
+    },
+    {
+      "category": "font_missing",
+      "priority": "P1",
+      "file": null,
+      "line": null,
+      "signature": "Package fontspec Warning: Font \"NotExistFont\" not found, using default.",
+      "message": "Font \"NotExistFont\" not found, using default.",
+      "root_cause": "字体缺失或当前引擎不支持该字体调用",
+      "suggested_fix": "XeLaTeX/LuaLaTeX 用 fc-list / font-discovery 查可用字体并改名；勿删除字体声明后静默换字体，需在变更记录中注明"
+    },
+    {
+      "category": "rerun_needed",
+      "priority": "P2",
+      "file": null,
+      "line": null,
+      "signature": "LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.",
+      "message": "Label(s) may have changed. Rerun to get cross-references right.",
+      "root_cause": "交叉引用/目录尚未收敛",
+      "suggested_fix": "再运行一轮编译；latex_build.py 的 aux 哈希收敛检测会自动处理"
+    },
+    {
+      "category": "bibtex_error",
+      "priority": "P1",
+      "file": "demo.blg",
+      "line": null,
+      "signature": "I couldn't open database file refs.bib",
+      "message": "I couldn't open database file refs.bib",
+      "root_cause": "BibTeX/Biber 数据库错误（.bib 缺失、重复条目、非法字符）",
+      "suggested_fix": "打开 .blg 对应行定位 .bib 问题：文件缺失则核对 \\bibliography 路径；重复键合并条目；修后重跑含 bib 轮次的构建"
+    },
+    {
+      "category": "bibtex_error",
+      "priority": "P1",
+      "file": "demo.blg",
+      "line": null,
+      "signature": "---line 12 of file main.aux",
+      "message": "---line 12 of file main.aux",
+      "root_cause": "BibTeX/Biber 数据库错误（.bib 缺失、重复条目、非法字符）",
+      "suggested_fix": "打开 .blg 对应行定位 .bib 问题：文件缺失则核对 \\bibliography 路径；重复键合并条目；修后重跑含 bib 轮次的构建"
+    },
+    {
+      "category": "bibtex_warning",
+      "priority": "P2",
+      "file": "demo.blg",
+      "line": null,
+      "signature": "Warning--empty year in smith2020",
+      "message": "Warning--empty year in smith2020",
+      "root_cause": "BibTeX 条目字段缺失或格式问题",
+      "suggested_fix": "按 .blg 提示补字段（如 year、pages）；核对条目键与正文 \\cite 一致"
+    }
+  ]
+}

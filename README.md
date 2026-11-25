@@ -27,13 +27,16 @@
 ```
 SKILL.md                        Skill 本体（触发条件、流程、异常处置）
 README.md                       本说明
+scripts/latex_preflight.py      无引擎静态预检 → preflight.json
 scripts/latex_build.py          多轮编译驱动 → build-report.json
 scripts/latex_log_triage.py     日志错误分诊 → triage.json
 scripts/result_emit.py          result.json 装配与契约校验
 references/error-catalog.md     错误类别-根因-修复策略目录
 references/build-recipes.md     引擎/轮次/模板核查清单/复现记录
 references/output-contract.md   result.json 字段语义与填写纪律
-examples/minimal-broken/        最小调用示例（示意输出已标注）
+references/self-check-rubric.md 交付前自查评分表（五张表）
+examples/log-triage-demo/       分诊演示（合成日志+预期输出，无需 TeX，示例）
+examples/minimal-broken/        最小编译-修复示例（示意输出已标注）
 ```
 
 ## 调用步骤
@@ -42,23 +45,27 @@ examples/minimal-broken/        最小调用示例（示意输出已标注）
 export SKILL_DIR=<本 Skill 安装目录>   # 平台评测时为 /skills/weekly-skill
 cd /app/work && cp -r /input/<工程材料> proj && cd proj
 
-# 1. 基线构建（自动探测主文件与引擎；可 --main/--engine 覆盖）
+# 1. 静态预检（秒级，无需 TeX；退出码 0 无 error / 1 有 error / 2 找不到主文件）
+python "$SKILL_DIR/scripts/latex_preflight.py" --project . --out ../preflight.json --text
+
+# 2. 基线构建（自动探测主文件与引擎；可 --main/--engine 覆盖）
 python "$SKILL_DIR/scripts/latex_build.py" --project . --report ../build-report.json
 #    退出码：0 成功；1 有错误；2 找不到主文件；3 环境缺引擎；4 超时
 
-# 2. 错误分诊（有错误时）
+# 3. 错误分诊（有错误时）
 python "$SKILL_DIR/scripts/latex_log_triage.py" main.log --out ../triage.json --text
 
-# 3. 按 fix_queue 修复后回到 1；收敛后进入交付
-# 4. 装配结果（answers.json 由 agent 汇总，见 references/output-contract.md）
+# 4. 按 fix_queue 修复后回到 1；收敛后按 references/self-check-rubric.md 自查
+# 5. 装配结果（answers.json 由 agent 汇总，见 references/output-contract.md）
 python "$SKILL_DIR/scripts/result_emit.py" --case /input/case.json \
     --answers ../answers.json --out /app/output/result.json
 ```
 
-输入输出：`latex_build.py` 读工程目录、写 build-report.json（状态/轮次/版本/错误
-计数）；`latex_log_triage.py` 读 .log/.blg、写 triage.json（分类 findings 与修复
-队列）；`result_emit.py` 读 case.json + answers.json、写 result.json 并报告缺失
-契约字段。
+输入输出：`latex_preflight.py` 读源码、写 preflight.json（环境配对/缺失文件/
+引用键/编码等静态 findings）；`latex_build.py` 读工程目录、写 build-report.json
+（状态/轮次/版本/错误计数）；`latex_log_triage.py` 读 .log/.blg、写 triage.json
+（分类 findings 与修复队列）；`result_emit.py` 读 case.json + answers.json、写
+result.json 并报告缺失契约字段。
 
 ## 适用场景与限制
 
@@ -66,21 +73,26 @@ python "$SKILL_DIR/scripts/result_emit.py" --case /input/case.json \
 中英文学术模板（article、ctex 系列、常见期刊会议 .cls）。
 
 限制：① 不处理 Word/InDesign 源（先人工转 .tex）；② 宏包冲突涉及 .cls 私有宏定义
-时需要人工判断；③ 缺少 TeX 引擎的环境只能交付源码与静态核查（脚本会如实报告
-environment_error）；④ overfull_box 等版式修复给出策略但不保证全自动消除。
+时需要人工判断；③ 缺少 TeX 引擎的环境降级为 latex_preflight.py 静态核查并如实
+标注未经真实编译；④ overfull_box 等版式修复给出策略但不保证全自动消除。
 
 ## 失败处理与自查
 
 - 任何阶段受阻：先以现有 answers.json 跑 result_emit.py 保存 `status=partial` 的
   result.json，`limits` 写明卡点；继续后重新装配。
-- 自查四问：编译得通（build-report status=success 且 converged）？改得对（公式/
-  表格/引用核查清单通过）？交得可用（干净目录按记录可复编译）？复现得了
-  （build_report 记录引擎版本与命令）？
+- 交付前逐项过 `references/self-check-rubric.md` 五张自查表（编译得通/改得对/
+  交得可用/复现得了/事实与边界），未通过项修复或写入 uncertainty（按
+  materials_missing / undecidable / run_failed 三分标注）。
 - 维护：错误类别表在 references/error-catalog.md，新增类别同步在
   latex_log_triage.py 的 RULES 中追加一行即可。
 
 ## 最小示例
 
-见 `examples/minimal-broken/README.md`（示意输出已标注为示例，非正式案例结果）。
+- `examples/log-triage-demo/README.md`：无需 TeX 的分诊演示（合成日志 + 预期
+  输出，可复跑核对，已标注为示例）；
+- `examples/minimal-broken/README.md`：最小编译-修复闭环示例（需 TeX，
+  示意输出已标注，非正式案例结果）。
 
-版本：1.0.0（2026-11）。反馈与维护：随参赛提交材料一并维护。
+版本：1.1.0（2026-11）：新增 latex_preflight.py 静态预检、log-triage-demo
+可复跑示例、self-check-rubric.md 自查评分表；uncertainty 三分标注。
+反馈与维护：随参赛提交材料一并维护，仓库地址见 GITHUB_URL.txt。
